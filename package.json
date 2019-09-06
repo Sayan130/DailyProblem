@@ -1,0 +1,20 @@
+{
+  "name": "dailyproblem",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "author": "Sayan",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "hbs": "^4.0.4",
+    "mongoose": "^5.6.13",
+    "nodemailer": "^6.3.0",
+    "nodemon": "^1.19.2",
+    "validator": "^11.1.0"
+  }
+}

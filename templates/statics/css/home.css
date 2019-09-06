@@ -1,0 +1,31 @@
+#inner{
+    height : 10%;
+    width: 35%;
+    background-color: powderblue;
+    margin-top: 50px ;
+    margin-left: 300px;
+    border-radius: 4px;
+}
+#form_id{
+    padding: 14px;
+    margin-left: 4px;
+    
+}
+#submit {
+    padding: 3px;
+    margin-top: 2px;
+    border-radius:4px;
+    background-color: khaki;  
+}
+#email_text{
+    border-radius: 4px;
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+}
+#head_info{
+    font-size: 2.5vw;
+    width: 60%;
+    margin-left: 23%;
+    margin-top: 5%;
+}
