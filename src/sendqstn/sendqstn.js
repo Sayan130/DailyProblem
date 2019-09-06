@@ -1,34 +1,37 @@
 let question = require("../models/question");
 let user = require("../models/user");
 let nm = require("nodemailer"); 
-let username = "rick.alipurduar.practice@gmail.com";
-let pass  = "alipurduar.practice";
+let path = require("path")
+let env = path.join(__dirname,"../../.env");
+require("dotenv").config({path:env});
+
+
 let transporter = nm.createTransport({
     service : "gmail",
     auth : {
-        user : username,
-        pass : pass
+        user : process.env.user,
+        pass : process.env.pass
     }
 });
 
 
-// setInterval(()=>{
+ setInterval(()=>{
 
+    getData().then(async(data)=>{
 
+        let mobj = await getQuestion({math : true});
+        setMail(mobj, "Math", data.mt.question);   
     
-// }, 10000);
- getData().then(async(data)=>{
-
-    let mobj = await getQuestion({math : true});
-    setMail(mobj, "Math", data.mt.question);   
-
-    mobj = await getQuestion({english : true});
-    setMail(mobj, "English", data.eng.question);   
-
-    mobj = await getQuestion({programming : true});
-    setMail(mobj, "Programming", data.pc.question);   
+        mobj = await getQuestion({english : true});
+        setMail(mobj, "English", data.eng.question);   
     
-})
+        mobj = await getQuestion({programming : true});
+        setMail(mobj, "Programming", data.pc.question);   
+        
+    })
+    
+    
+ }, 10000);
 
 async function getData(){
     try{
@@ -60,11 +63,13 @@ async function getQuestion(body){
 
 function setMail(mobj, cat, question){
     mailId = "";
-    
-    for(let k = 0; k < mobj.length; k++)
+
+    if(!mobj.length == 0){
+
+        for(let k = 0; k < mobj.length; k++)
             mailId += mobj[k].email+",";
-    sendEmail(mailId, cat, JSON.stringify(question));
-    
+        sendEmail(mailId, cat, JSON.stringify(question));
+    }
 }
 
 
@@ -76,7 +81,7 @@ function sendEmail(value, cat, question){
         subject : "Hi This is your daily"+` ${cat} `+"problem",
         text : question
     };
-    console.log(mailOption);
+    
     transporter.sendMail(mailOption, (err, info)=>{
 
         if(err)
